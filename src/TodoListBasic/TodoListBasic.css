@@ -1,0 +1,8 @@
+p{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+ul, li, p{
+    padding: 10px 20px;
+    border: 1px solid #000;
+}
