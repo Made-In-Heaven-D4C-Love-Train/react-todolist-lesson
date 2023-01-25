@@ -2,62 +2,50 @@ import React, { useState } from 'react';
 import "./TodoListBasic.css";
 const TodoListBasic = () => {
     
-   const [toDo, setToDo] = useState<string>("");
-   const [inProgress, setInProgress] = useState<string>("");
-   const [done, setDone] = useState<string>("");
+   const [value, setValue] = useState<string>("");
    const [toDoList, setToDoList] = useState<string[]>([]);
    const [inProgressList, setInProgressList] = useState<string[]>([]);
    const [DoneList, setDoneList] = useState<string[]>([]);
-
-   const handleAddToDo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setToDo(e.target.value);
+   const [category, setCategory] = useState<string>("");
+   
+   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
+     setCategory(e.target.value);
    }
-   const handleClickToDo = () => {
-    setToDoList(prev => [...prev, toDo])
+   const handleAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+   }
+   const handleClick = () => {
+    console.log(category);
+    if(category === "" || category === "to-do") setToDoList(prev => [...prev, value]);
+    else if(category === "in-progress") setInProgressList(prev => [...prev, value]);
+    else setDoneList(prev => [...prev, value]);
 };
 
-const handleAddInProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInProgress(e.target.value);
-   }
-   const handleClickInProgress = () => {
-    setInProgressList(prev => [...prev, inProgress])
-};
-
-const handleAddDone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDone(e.target.value);
-   }
-   const handleClickDone = () => {
-    setDoneList(prev => [...prev, done])
-};
     return <>
     
     <label>To do :</label>
-    <input type="text" value={toDo} onChange={handleAddToDo} />
-    <button onClick={handleClickToDo}>Add</button><br /><br />
+    <input type="text" value={value} onChange={handleAdd} />
+    
+    <select onChange={handleChange}>
+    <option value="to-do" selected={true}>To do</option>
+    <option value="in-progress">In progress</option>
+    <option value="done">Done</option>
+    </select>
+    <button onClick={handleClick}>Add</button><br /><br />
 
 
-    <label>In progress :</label>
-    <input type="text" value={inProgress} onChange={handleAddInProgress} />
-    <button onClick={handleClickInProgress}>Add</button><br /><br />
-
-    <label>Done :</label>
-    <input type="text" value={done} onChange={handleAddDone} />
-    <button onClick={handleClickDone}>Add</button><br /><br />
-
-
-    <p>To do :</p>
-    <ul>
-        {toDoList.map((toDo, index) => (<li key={index}>{toDo}</li>))}
-    </ul>
-    <p>In progress :</p>
-    <ul>
-        {inProgressList.map((inProgress, index) => (<li key={index}>{inProgress}</li>))}
-    </ul>
-    <p>Done:</p>
-    <ul>
-        {DoneList.map((done, index) => (<li key={index}>{done}</li>))}
-    </ul>
-
+    <table>
+                    <tr>
+                        <td>To do</td>
+                        <td>In progress</td>
+                        <td>Done</td>
+                    </tr>
+                    <tr>
+                        <td>{toDoList.map((toDo, index) => (<p key={index}>{toDo}</p>))}</td>
+                        <td>{inProgressList.map((inProgress, index) => (<p key={index}>{inProgress}</p>))}</td>
+                        <td>{DoneList.map((done, index) => (<p key={index}>{done}</p>))}</td>
+                    </tr>
+                </table>
     </>
 };
 

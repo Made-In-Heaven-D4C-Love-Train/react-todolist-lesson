@@ -1,8 +1,37 @@
-p{
-    border-collapse: collapse;
-    border-spacing: 0;
+td,th {
+    border: 1px solid rgb(190, 190, 190) !important;
+    padding: 10px !important;
 }
-ul, li, p{
-    padding: 10px 20px;
-    border: 1px solid #000;
+
+td {
+    text-align: center  !important;
 }
+
+tr:nth-child(even) {
+    background-color: #eee !important;
+}
+
+th[scope='col'] {
+    background-color: #696969 !important;
+    color: #fff !important;
+}
+
+th[scope='row'] {
+    background-color: #d7d9f2 !important;
+}
+
+caption {
+    padding: 10px !important;
+    caption-side: bottom !important;
+}
+
+table {
+    border-collapse: collapse !important;
+    border: 2px solid rgb(200, 200, 200) !important;
+    letter-spacing: 1px !important;
+    font-family: sans-serif !important;
+    font-size: 0.8rem !important;
+    width: 100% !important;
+}
+
+/* J'ai mis des !important partout car je ne sais pas si on a le droit de directement modifier le index.css */
