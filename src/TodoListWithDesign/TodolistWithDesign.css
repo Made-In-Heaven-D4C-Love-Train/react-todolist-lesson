@@ -1,0 +1,40 @@
+/* .bouton_submit{
+margin-left: 1%;
+margin-top: 2%;
+
+min-width: 0%;
+} */
+
+/* .input_submit{
+    margin-top: 2%;
+    margin-left: 2%;
+    max-width: 75%;
+    min-width: 1%;
+} */
+
+.create-item{
+    display: flex;
+}
+
+.create-item>*{
+   margin: 1%;
+}
+
+.affiche-liste{
+    display: flex;
+} 
+
+.affiche-liste>*{
+    width: 100%;
+    text-align: center;
+    /* display: flex;  */
+}
+
+.affiche-item{
+    display: flex;
+}
+.affiche-item>*{
+    margin: 1%;
+    width: 100%; 
+    text-align: center;
+}
