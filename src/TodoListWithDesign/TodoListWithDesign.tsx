@@ -52,7 +52,7 @@ import { CloseOutlined } from '@ant-design/icons';
       //console.log(newData[columnIndex].items);
       return newData;
     });
-    setItemValue(''); // ne pas oublier de reinitialiser la variable itemValue
+    setItemValue('');
   };
 
   const handleRemoveItem = (columnName: string, item: string) => {
