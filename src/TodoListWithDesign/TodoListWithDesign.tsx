@@ -19,6 +19,9 @@ import { CloseOutlined } from '@ant-design/icons';
      }
 
      const handleClick = () => {
+      for(var i=0;i<data.length;i++){
+        if(data[i].name === columnValue) return;
+      }
       setData(prev => [...prev, { name: columnValue, items: [] }]);
       setColumnValue('');
       console.log(data)
@@ -105,3 +108,8 @@ import { CloseOutlined } from '@ant-design/icons';
   };
 
   export default TodoListWithDesign;
+
+
+  // Il faut d'abord selectionner la colonne dans la liste deroulante avant de pouvoir saisir l'item
+  // Il n'est pas possible de creer deux colonnes qui portent le meme nom
+  // Il n'est pas possible de creer deux items qui portent le meme nom dans la meme colonne
