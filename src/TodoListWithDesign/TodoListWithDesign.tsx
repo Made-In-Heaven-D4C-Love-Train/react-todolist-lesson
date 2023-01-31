@@ -80,7 +80,7 @@ import { CloseOutlined } from '@ant-design/icons';
     onSelect={handleChange}
       options={[
         {value: "", label: "Select column"},
-        ...data.map(item => ({ value: item.name, label: item.name }))
+        ...data.map(column => ({ value: column.name, label: column.name }))
       ]}
       
     />
