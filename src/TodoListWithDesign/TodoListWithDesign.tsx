@@ -8,10 +8,12 @@ import {
   } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
   const TodoListWithDesign = () => {
-    const [data, setData] = useState<{ name: string, items: string[] }[]>([]);
+    const [data, setData] = useState<{ name: string, items: { id: string, name: string }[] }[]>([]);
     const [columnValue, setColumnValue] = useState<string>("");
     const [itemValue, setItemValue] = useState<string>("");
     const [selectValue, setSelectValue] = useState<string>("");
+
+    const randomId = () => (Math.random() + 1).toString(36).substring(7);
 
     const handleAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
       setColumnValue(e.target.value);
@@ -32,24 +34,19 @@ import { CloseOutlined } from '@ant-design/icons';
   }
   const handleAddItem = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(selectValue !== "") setItemValue(e.target.value)
-    //handleChange(e);
   }
 
   const handleAddItemClick = () => {
     if (itemValue === '' || selectValue === '') return;
   
-    const columnIndex = data.findIndex(data => data.name === selectValue); //verifie s'il trouve le nom de la colonne dans data et determine son index
+    const columnIndex = data.findIndex(data => data.name === selectValue); 
     if (columnIndex === -1) return;
-    //console.log(data[columnIndex].items);
 
-    for(var i=0;i<data[columnIndex].items.length; i++){
-      if(data[columnIndex].items[i] === itemValue) return; //verifie si l'item n'existe pas deja dans la colonne
-    }
+    const id = randomId();
 
     setData(prev => {
       const newData = [...prev];
-      newData[columnIndex].items.push(itemValue); //si oui il insere l'item dans le tableau items a l'index determine 
-      //console.log(newData[columnIndex].items);
+      newData[columnIndex].items.push({ id, name: itemValue }); 
       return newData;
     });
     setItemValue('');
@@ -62,7 +59,7 @@ import { CloseOutlined } from '@ant-design/icons';
     setData(prev => {
       const newData = [...prev];
       newData[columnIndex].items = newData[columnIndex].items.filter(
-        i => i !== item
+        i => i.id !== item
       );
       return newData;
     });
@@ -96,8 +93,8 @@ import { CloseOutlined } from '@ant-design/icons';
         header={column.name}
         bordered
         dataSource={column.items}
-        renderItem={item => <> <div className='affiche-item'> <List.Item>{item}</List.Item>
-        <Button onClick={() => handleRemoveItem(column.name, item)}><CloseOutlined/></Button> </div></>
+        renderItem={item => <> <div className='affiche-item'> <List.Item>{item.name}</List.Item>
+        <Button onClick={() => handleRemoveItem(column.name, item.id)}><CloseOutlined/></Button> </div></>
         } />
         
 ))}
@@ -112,4 +109,3 @@ import { CloseOutlined } from '@ant-design/icons';
 
   // Il faut d'abord selectionner la colonne dans la liste deroulante avant de pouvoir saisir l'item
   // Il n'est pas possible de creer deux colonnes qui portent le meme nom
-  // Il n'est pas possible de creer deux items qui portent le meme nom dans la meme colonne
